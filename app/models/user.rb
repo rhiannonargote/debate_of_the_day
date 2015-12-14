@@ -1,4 +1,13 @@
 class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -31,7 +40,7 @@ class User < ActiveRecord::Base
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
-    return false if digest.nil?
+     return false if remember_digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -65,6 +74,36 @@ class User < ActiveRecord::Base
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+# Returns a user's status feed.
+  # def feed
+    # Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
+                    # following_ids: following_ids, user_id: id)
+  # end
+
+
+  # Returns a user's status feed.
+  def feed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+  end
+
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
   end
 
    private
