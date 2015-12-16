@@ -1,0 +1,12 @@
+<%= render :partial => 'micropost', locals: { micropost: @micropost } %>
+<%= render :partial => 'shared/comment_form' %>
+
+<br>
+<br>
+<br>
+
+<ol class="comments">
+  <% @comments.each do |comment| %>
+    <%= render :partial => 'comments/comment', locals: { comment: comment } %>
+  <% end %>
+</ol>
