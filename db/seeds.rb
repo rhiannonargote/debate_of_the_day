@@ -19,19 +19,17 @@ User.create!(name:  "Example User",
               activated_at: Time.zone.now)
 end
 
+Question.destroy_all
+q1 = Question.create :category => 'Politics', :for => 'Too much?', :against => 'Not enough?'
+q1.user = User.first
+
 # Microposts
 users = User.order(:created_at).take(6)
-50.times do
+5.times do
   content = Faker::Lorem.sentence(5)
-  users.each { |user| user.microposts.create!(content: content) }
+  users.each { |user| user.microposts.create!(content: content, for: Random.rand(0..1), question_id: q1.id) }
 end
 
-# Comments
-users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(5)
-  users.each { |user| user.comments.create!(content: content) }
-end
 
 # Following relationships
 users = User.all
@@ -40,3 +38,5 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+q1.save

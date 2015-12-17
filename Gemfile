@@ -14,6 +14,8 @@ gem 'carrierwave'
 gem 'mini_magick'            
 gem 'fog'                    
 
+gem 'giphy'
+
 gem 'will_paginate'
 
 gem 'bootstrap-will_paginate'

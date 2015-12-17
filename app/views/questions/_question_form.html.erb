@@ -1,0 +1,22 @@
+<%= form_for @question do |f| %>
+<p>
+  <%= f.label :category %>  
+  <%= f.text_field :category, :required => true %>
+</p>
+
+<p>
+  <%= f.label :for %>  
+  <%= f.text_field :for, :required => true %>
+</p>
+
+<p>
+  <%= f.label :against %>  
+  <%= f.text_field :against, :required => true %>
+</p>
+
+
+<%= f.submit %>
+
+<% end %>
+
+     

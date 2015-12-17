@@ -13,7 +13,12 @@
     <div class="container">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>  
+      <% end %>
+      <h1>Today's Topic: <%= @question.category %></h1>
+      <div class="row">
+        <div class="col-md-6 question_for">For: <%= @question.for %></div>
+        <div class="col-md-6 question_against">Against: <%= @question.against %></div>
+      </div>    
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>

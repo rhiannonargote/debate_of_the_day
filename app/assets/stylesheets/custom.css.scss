@@ -336,3 +336,56 @@ span.picture {
   }
 }
 
+.question_for {
+  color: gray;
+  font-size: 30px;
+  text-align: center;
+  padding: 40px;
+  height: 200px;
+  background-color: white;
+}
+
+.question_against {
+  color: black;
+  font-size: 30px;
+  text-align: center;
+  padding: 40px;
+  height: 200px;
+  background-color: white;
+}
+
+.space {
+  height: 50px;
+}
+
+.for {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  background-color: #90EE90;
+  height: 50px;
+}
+
+.against {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  background-color: #FF7F7F;
+  height: 50px;
+}
+
+.form-inline {
+  margin-top: 0px;
+  padding: 10px;
+}
+
+.radio1 {
+}
+
+.radio2 {
+  margin-left: 100px;
+  margin-top: 0px;
+}
+

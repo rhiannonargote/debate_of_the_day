@@ -3,8 +3,6 @@ class CommentsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def create
-    # @comment = current_user.comments.build(comment_params)
-
     comment_details = comment_params
     comment_details[:user_id] = @current_user.id
 

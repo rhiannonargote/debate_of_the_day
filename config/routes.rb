@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :questions
   resources :microposts,          only: [:create, :destroy] do 
-    resources :comments,          only: [:create, :destroy]
+      resources :comments,          only: [:create, :destroy]
   end  
   resources :relationships,       only: [:create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

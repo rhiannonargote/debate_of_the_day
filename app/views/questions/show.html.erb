@@ -1,7 +1,3 @@
-<% if logged_in? %>
-      <section class="col-md-12 micropost_form">
-        <%= render 'shared/micropost_form' %>
-      </section> 
     <div class="row">
       <div class="col-md-6 for">For (<%= @question.for_posts.count %>)</div>
       <div class="col-md-6 against">Against (<%= @question.against_posts.count %>)</div>
@@ -17,15 +13,3 @@
       <%= render @question.against_posts %>
       </ol>
     </div>
-
-<% else %>
-<div class="center jumbotron">
-  <h2>
-    A new day, a new global debate
-  </h2>
-
- <%= link_to "Where do you stand?", signup_path, class: "btn btn-lg btn-danger" %>
-</div>
-
-
-<% end %>            
